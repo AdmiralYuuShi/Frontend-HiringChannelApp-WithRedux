@@ -38,7 +38,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => ({
   search: (search) => dispatch(searchEngineers(search)),
-  fetch: (search) => dispatch(fetchEngineers(search))
+  fetch: (search, sortBy='name', orderBy='ASC', limit='5') => dispatch(fetchEngineers('http://localhost:8080/api/v1/engineer?search='+search+'&page=1&sortBy='+sortBy+'&orderBy='+orderBy+'&limit='+limit))
 })
 
 export default  connect(mapStateToProps, mapDispatchToProps)(SearchField)

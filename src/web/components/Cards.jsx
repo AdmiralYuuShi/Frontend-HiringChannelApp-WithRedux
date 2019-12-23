@@ -29,7 +29,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  fetch: (search, sortBy, orderBy, limit) => dispatch(fetchEngineers(search, sortBy, orderBy, limit))
+  fetch: (search, sortBy, orderBy, limit) => dispatch(fetchEngineers('http://localhost:8080/api/v1/engineer?search='+search+'&page=1&sortBy='+sortBy+'&orderBy='+orderBy+'&limit='+limit))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cards)

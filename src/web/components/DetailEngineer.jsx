@@ -83,10 +83,6 @@ class DetailEngineer extends Component {
       console.log(res.data.data[0])
       let d = new Date(res.data.data[0].date_of_birth)
       let option =  { year: 'numeric', month: 'long', day: 'numeric' }
-      // let dob = (d.getUTCMonth()+1) > 9 ? 
-      // d.getUTCFullYear()+'-'+(d.getUTCMonth()+1)+'-'+(d.getUTCDate()+1)
-      // :
-      // d.getUTCFullYear()+'-0'+(d.getUTCMonth()+1)+'-'+(d.getUTCDate()+1)
       let dob = d.toLocaleDateString("en-UK", option)
 
       this.setState({

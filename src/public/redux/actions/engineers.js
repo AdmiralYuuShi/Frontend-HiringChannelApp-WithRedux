@@ -1,8 +1,8 @@
 import axios from 'axios'
 
-export const fetchEngineers = (search, sortBy = 'name', orderBy = 'ASC', limit = 5) => ({
+export const fetchEngineers = (api) => ({
   type: "FETCH_ENGINEERS",
-  payload: axios.get('http://localhost:8080/api/v1/engineer?search='+search+'&page=1&sortBy='+sortBy+'&orderBy='+orderBy+'&limit='+limit)
+  payload: axios.get(api)
 })
 
 export const searchEngineers = (search) => ({

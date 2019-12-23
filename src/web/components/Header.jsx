@@ -9,11 +9,6 @@ import logo from '../assets/images/arkademy-logo.png'
 
 class Header extends React.Component{
 
-
-  setDataFromSearch = (searchData) => {
-    this.props.getDataFromHeader(searchData) 
-  }
-
   handleLogout = () =>{
     localStorage.removeItem('jwtToken')
     localStorage.removeItem('userId')
@@ -54,9 +49,9 @@ class Header extends React.Component{
           <Navbar.Collapse id="responsive-navbar-nav">
           <Col md="7">
           {this.props.searchBar === true ? 
-          <SearchField getDataFromSearch={this.setDataFromSearch} onChange={this.setDataFromSearch}/>
+          <SearchField/>
           :
-          <div></div>
+          <></>
           }
           </Col>
           <Col>

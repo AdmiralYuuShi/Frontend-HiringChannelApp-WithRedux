@@ -19,10 +19,6 @@ function CardsList(props){
         <Col md="2" className="mt-3 ml-1 mr-1" key={engineers.engineer_id}>
           <Card>
           <Card.Img variant="top" src={'http://localhost:8080/images/'+engineers.profil_picture} />
-          {/* <Card style={{ borderRadius: '10%' ,backgroundSize: 'cover', 
-          backgroundImage: `url(http://localhost:8080/images/${engineers.profil_picture})` }}>
-            <Card.Body style={{height: '200px'}}>
-            </Card.Body> */}
             <Card.Footer className="text-white bg-dark" style={{ borderBottomLeftRadius : '15%', borderBottomRightRadius : '15%', lineHeight: '100%'}}>
               <Link to={{
                 pathname:'engineer/detail/',
