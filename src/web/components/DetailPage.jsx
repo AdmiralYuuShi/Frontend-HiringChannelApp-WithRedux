@@ -45,11 +45,11 @@ class DetailPage extends Component {
             <InputGroup.Prepend className="ml-5">
               <InputGroup.Text>Total data</InputGroup.Text>
             </InputGroup.Prepend>
-            <FormControl defaultValue='' type='number' style={{width:'50px'}} disabled/>
+            <FormControl defaultValue={this.props.engineers.detailPage.allData} type='number' style={{width:'50px'}} disabled/>
             <InputGroup.Prepend className="">
               <InputGroup.Text>Limit</InputGroup.Text>
             </InputGroup.Prepend>
-            <FormControl onChange={(e) => this.limit(e.target.value)} defaultValue='' type='number' min="1" className=' mr-5' />
+            <FormControl onChange={(e) => this.limit(e.target.value)} defaultValue={this.props.engineers.detailPage.limit} type='number' min="1" className=' mr-5' />
           </InputGroup>
           </Col>
           <Col md='2'>

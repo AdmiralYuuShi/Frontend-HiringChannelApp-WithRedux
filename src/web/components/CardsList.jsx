@@ -17,10 +17,13 @@ function CardsList(props){
     <Row className='justify-content-center'>
       {props.engineers.engineers.map(engineers => (
         <Col md="2" className="mt-3 ml-1 mr-1" key={engineers.engineer_id}>
-          <Card style={{ borderRadius: '10%' ,backgroundSize: 'cover', backgroundImage: 'url(https://scontent-frx5-1.cdninstagram.com/vp/27c1c5c683d2582ef6e3368f41218e06/5E295C79/t51.2885-15/e35/s320x320/72782968_152041276013960_2861538620607258147_n.jpg?_nc_ht=scontent-frx5-1.cdninstagram.com&_nc_cat=108)'}}>
+          <Card>
+          <Card.Img variant="top" src={'http://localhost:8080/images/'+engineers.profil_picture} />
+          {/* <Card style={{ borderRadius: '10%' ,backgroundSize: 'cover', 
+          backgroundImage: `url(http://localhost:8080/images/${engineers.profil_picture})` }}>
             <Card.Body style={{height: '200px'}}>
-            </Card.Body>
-            <Card.Footer className="text-white bg-dark" style={{ borderBottomLeftRadius : '15%', borderBottomRightRadius : '15%', lineHeight: '100%' ,opacity: '0.8'}}>
+            </Card.Body> */}
+            <Card.Footer className="text-white bg-dark" style={{ borderBottomLeftRadius : '15%', borderBottomRightRadius : '15%', lineHeight: '100%'}}>
               <Link to={{
                 pathname:'engineer/detail/',
                 engineerId: engineers.engineer_id

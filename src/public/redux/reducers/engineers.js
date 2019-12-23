@@ -1,5 +1,6 @@
 const initialState = {
   engineers: [],
+  detailPage: {},
   isLoading: false,
   isError: false,
   search: ''
@@ -27,6 +28,7 @@ const engineers = (state = initialState, action ) => {
         ...state,
         isLoading: false,
         isError: false,
+        detailPage: action.payload.data,
         engineers: [...action.payload.data.data]
       }
     case "FETCH_ENGINEERS_REJECTED":

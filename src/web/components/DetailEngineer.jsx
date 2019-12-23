@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
-import { Row, Col, Card, ListGroup, Button, ButtonGroup } from 'react-bootstrap'
+import { Form, Row, Col, Card, ListGroup, Button, ButtonGroup } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faUser, faTag, faMoneyBillWave, faPhoneSquare, faCode, faMapMarkedAlt, faCalendarAlt } from '@fortawesome/free-solid-svg-icons'
 import Header from './Header'
@@ -25,8 +25,11 @@ class DetailEngineer extends Component {
       expected_salary: null,
       email: null,
       phone: null,
+      profilPicture: null,
       date_created: null,
-      date_updated: null
+      date_updated: null,
+      profil_picture: null,
+      message: ''
     }
   }
 
@@ -49,6 +52,29 @@ class DetailEngineer extends Component {
     .catch(err => {
 
     })
+  }
+
+  changeProfilePicture(e){
+    e.preventDefault()
+    console.log(this.state.profil_picture)
+    let formData = new FormData()
+    formData.append('file', this.state.profil_picture)
+    const jwt = getJwt()
+    const config = (
+      { headers: { 'Content-type':'multipart/form-data', Authorization: `Bearer ${jwt.jwtToken}`, email: jwt.email, userid: jwt.userId }}
+    )
+    axios.put(`http://localhost:8080/api/v1/engineer/changeProfilPicture/${this.props.location.engineerId}`, formData, config)
+      .then( res=>{
+        this.setState({
+          message: 'Update Success!'
+        })
+      })
+      .catch(err=>{
+        console.log(err)
+        this.setState({
+          message: 'Update Failed!'
+        })
+      })
   }
 
   getEngineers(url){
@@ -75,6 +101,7 @@ class DetailEngineer extends Component {
         expected_salary: res.data.data[0].expected_salary,
         email: res.data.data[0].email,
         phone: res.data.data[0].phone,
+        profilPicture: res.data.data[0].profil_picture,
         date_created: res.data.data[0].date_created,
         date_updated: res.data.data[0].date_updated
       })
@@ -92,6 +119,7 @@ class DetailEngineer extends Component {
         currency: 'USD',
         minimumFractionDigits: 2
       })
+      console.log('Profil Picture ======== '+this.state.profilPicture)
       return(
         <>
         <Header />
@@ -99,13 +127,23 @@ class DetailEngineer extends Component {
         <Row className="justify-content-center mt-3">
           <Col md='4' className="text-center">
             <Card style={{ width: '18rem' }}>
-              <Card.Img variant="top" src="https://scontent-frx5-1.cdninstagram.com/vp/27c1c5c683d2582ef6e3368f41218e06/5E295C79/t51.2885-15/e35/s320x320/72782968_152041276013960_2861538620607258147_n.jpg?_nc_ht=scontent-frx5-1.cdninstagram.com&_nc_cat=108" />
+              <Card.Img variant="top" src={'http://localhost:8080/images/'+this.state.profilPicture} />
               <ListGroup className="list-group-flush">
-                <ListGroup.Item variant="primary"><h3>{this.state.name}</h3></ListGroup.Item>
+                <ListGroup.Item variant="primary" className="text-dark"><h3>{this.state.name}</h3></ListGroup.Item>
               </ListGroup>
             </Card>
             { this.state.user_id === jwt.userId ? 
-            <Button variant="primary" className="mr-5 mt-3">Change Profile Picture</Button>
+            <Form method="POST" onSubmit={ (e) => this.changeProfilePicture(e)}>
+            <div className="input-group pr-5 text-left">
+              <div className="custom-file">
+                <input type="file" className="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" onChange={(e) => this.setState({ profil_picture: e.target.files[0]})} />
+                <label className="custom-file-label">Choose file</label>
+              </div>
+              <div className="input-group-append pr-3">
+                <button className="btn btn-success" type="submit" id="inputGroupFileAddon04">Upload</button>
+              </div>
+            </div>
+            </Form>
             :
             <div></div>
             }

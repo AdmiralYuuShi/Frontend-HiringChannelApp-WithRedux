@@ -8,10 +8,10 @@ import { connect } from 'react-redux'
 import { fetchEngineers } from '../../public/redux/actions/engineers'
 
 class Cards extends Component {
+  
   componentDidMount(){
     this.props.fetch('', 'name', 'ASC', 5)
   }
-
 
   render() {
     return (

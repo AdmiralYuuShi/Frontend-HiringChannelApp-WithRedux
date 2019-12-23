@@ -5,7 +5,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 import { connect } from 'react-redux'
 
-import { searchEngineers } from '../../public/redux/actions/engineers'
+import { searchEngineers, fetchEngineers } from '../../public/redux/actions/engineers'
 
 class SearchField extends Component {
 
@@ -38,7 +38,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => ({
   search: (search) => dispatch(searchEngineers(search)),
-  fetch: (search) => dispatch(searchEngineers(search))
+  fetch: (search) => dispatch(fetchEngineers(search))
 })
 
 export default  connect(mapStateToProps, mapDispatchToProps)(SearchField)
