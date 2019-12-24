@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, withRouter } from "react-router-dom";
 import axios from 'axios'
 import { Card, Row, Col, Button, Form, Alert } from 'react-bootstrap'
-import { getJwt } from '../helper/jwt'
+import { getJwt } from '../../helper/jwt'
 
 class CreateProfile extends React.Component{
 
@@ -25,7 +25,7 @@ class CreateProfile extends React.Component{
   handleCreate(e){
     e.preventDefault()
     const jwt = getJwt()
-    const api = 'http://localhost:8080/api/v1/engineer'
+    const api = process.env.REACT_APP_API_URL+'/api/v1/engineer'
     const data = {
       name: this.state.name,
       description: this.state.description,

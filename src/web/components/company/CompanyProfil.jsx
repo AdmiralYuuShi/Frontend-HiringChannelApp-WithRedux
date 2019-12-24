@@ -9,27 +9,21 @@ import EditProfil from './EditProfil'
 import CreateProfile from './CreateProfile'
 import { getJwt } from '../helper/jwt'
 
-class MyProfile extends Component {
+class CompanyProfile extends Component {
   constructor(){
     super()
 
     this.state = {
       editProfil: false,
-      engineer_id: null,
+      company_id: null,
       user_id: null,
-      name: null,
-      description: null,
-      skill: null,
-      location: null,
-      date_of_birth: null,
-      showcase: null,
-      expected_salary: null,
-      email: null,
-      phone: null,
-      profilPicture: null,
+      name: '',
+      logo: null,
+      company_logo: null,
+      location: '',
+      description: '',
       date_created: null,
       date_updated: null,
-      profil_picture: null,
       message: ''
     }
   }
@@ -37,35 +31,33 @@ class MyProfile extends Component {
   componentDidMount(){
     // do something after component mounted 
     const jwt = getJwt()
-    this.getEngineers('http://localhost:8080/api/v1/engineer/byUserId/'+jwt.userId)
+    this.getCompany(process.env.REACT_APP_API_URL+'/api/v1/company/byUserId/'+jwt.userId)
   }
 
   handleEdit(){
     this.setState({editProfil: true})
-    console.log(this.state.editProfil)
   }
 
   handleDelete(){
     const jwt = getJwt()
-    axios.delete('http://localhost:8080/api/v1/engineer/'+this.state.engineer_id, { headers: { Authorization: `Bearer ${jwt.jwtToken}`, email: jwt.email, userid: jwt.userId }} )
+    axios.delete(process.env.REACT_APP_API_URL+'/api/v1/engineer/'+this.state.company_id, { headers: { Authorization: `Bearer ${jwt.jwtToken}`, email: jwt.email, userid: jwt.userId }} )
     .then(res => {
-      this.props.history.push("/");
+      this.props.history.push("/company");
     })
     .catch(err => {
 
     })
   }
 
-  changeProfilePicture(e){
+  changeLogo(e){
     e.preventDefault()
-    console.log(this.state.profil_picture)
     let formData = new FormData()
-    formData.append('file', this.state.profil_picture)
+    formData.append('file', this.state.company_logo)
     const jwt = getJwt()
     const config = (
       { headers: { 'Content-type':'multipart/form-data', Authorization: `Bearer ${jwt.jwtToken}`, email: jwt.email, userid: jwt.userId }}
     )
-    axios.put(`http://localhost:8080/api/v1/engineer/changeProfilPicture/${this.state.engineerId}`, formData, config)
+    axios.put(`${process.env.REACT_APP_API_URL}/api/v1/engineer/changeLogo/${this.state.company_id}`, formData, config)
       .then( res=>{
         this.setState({
           message: 'Update Success!'
@@ -79,16 +71,12 @@ class MyProfile extends Component {
       })
   }
 
-  getEngineers(url){
+  getCompany(url){
     axios.get(url)
     .then(res => {
       console.log(res.data.data[0])
       let d = new Date(res.data.data[0].date_of_birth)
       let option =  { year: 'numeric', month: 'long', day: 'numeric' }
-      // let dob = (d.getUTCMonth()+1) > 9 ? 
-      // d.getUTCFullYear()+'-'+(d.getUTCMonth()+1)+'-'+(d.getUTCDate()+1)
-      // :
-      // d.getUTCFullYear()+'-0'+(d.getUTCMonth()+1)+'-'+(d.getUTCDate()+1)
       let dob = d.toLocaleDateString("en-UK", option)
 
       this.setState({
@@ -129,7 +117,7 @@ class MyProfile extends Component {
           <Row className="justify-content-center mt-3">
             <Col md='4' className="text-center">
               <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={'http://localhost:8080/images/'+this.state.profilPicture} />
+                <Card.Img variant="top" src={process.env.REACT_APP_API_URL+'/images/'+this.state.profilPicture} />
                 <ListGroup className="list-group-flush">
                   <ListGroup.Item variant="primary"><h3>{this.state.name}</h3></ListGroup.Item>
                 </ListGroup>
@@ -191,4 +179,4 @@ class MyProfile extends Component {
     }
 }
 
-export default withRouter(MyProfile)
+export default withRouter(CompanyProfile)

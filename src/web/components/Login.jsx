@@ -18,7 +18,7 @@ class Register extends React.Component{
 
   handleLogin(e){
     e.preventDefault()
-    const api = 'http://localhost:8080/api/v1/user/login'
+    const api = process.env.REACT_APP_API_URL+'/api/v1/user/login'
     const data = {
       username: this.state.username,
       password: this.state.password

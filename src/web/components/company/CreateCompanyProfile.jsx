@@ -19,7 +19,7 @@ class CreateCompanyProfile extends React.Component{
   handleCreate(e){
     e.preventDefault()
     const jwt = getJwt()
-    const api = 'http://localhost:8080/api/v1/engineer'
+    const api = process.env.REACT_APP_API_URL+'/api/v1/company'
     const data = {
       name: this.state.name,
       location: this.state.location,
@@ -37,7 +37,6 @@ class CreateCompanyProfile extends React.Component{
 
 
   render(){
-    console.log(this.state.email)
     return (
       <>
       <Header />

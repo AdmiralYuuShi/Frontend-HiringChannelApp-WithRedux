@@ -18,7 +18,7 @@ class Register extends React.Component{
 
   handleRegister(e){
     e.preventDefault()
-    const api = 'http://localhost:8080/api/v1/user/register'
+    const api = process.env.REACT_APP_API_URL+'/api/v1/user/register'
     const data = {
       email: this.state.email,
       username: this.state.username,

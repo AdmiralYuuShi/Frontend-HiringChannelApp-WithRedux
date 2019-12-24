@@ -4,9 +4,9 @@ import axios from 'axios'
 import { Form, Row, Col, Card, ListGroup, Button, ButtonGroup } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faUser, faTag, faMoneyBillWave, faPhoneSquare, faCode, faMapMarkedAlt, faCalendarAlt } from '@fortawesome/free-solid-svg-icons'
-import Header from './Header'
+import Header from '../Header'
 import EditProfil from './EditProfil'
-import { getJwt } from '../helper/jwt'
+import { getJwt } from '../../helper/jwt'
 
 class DetailEngineer extends Component {
   constructor(){
@@ -35,7 +35,7 @@ class DetailEngineer extends Component {
 
   componentDidMount(){
     // do something after component mounted 
-    this.getEngineers('http://localhost:8080/api/v1/engineer/'+this.props.location.engineerId)
+    this.getEngineers(process.env.REACT_APP_API_URL+'/api/v1/engineer/'+this.props.location.engineerId)
   }
 
   handleEdit(){
@@ -45,7 +45,7 @@ class DetailEngineer extends Component {
 
   handleDelete(){
     const jwt = getJwt()
-    axios.delete('http://localhost:8080/api/v1/engineer/'+this.props.location.engineerId, { headers: { Authorization: `Bearer ${jwt.jwtToken}`, email: jwt.email, userid: jwt.userId }} )
+    axios.delete(process.env.REACT_APP_API_URL+'/api/v1/engineer/'+this.props.location.engineerId, { headers: { Authorization: `Bearer ${jwt.jwtToken}`, email: jwt.email, userid: jwt.userId }} )
     .then(res => {
       this.props.history.push("/engineer");
     })
@@ -63,7 +63,7 @@ class DetailEngineer extends Component {
     const config = (
       { headers: { 'Content-type':'multipart/form-data', Authorization: `Bearer ${jwt.jwtToken}`, email: jwt.email, userid: jwt.userId }}
     )
-    axios.put(`http://localhost:8080/api/v1/engineer/changeProfilPicture/${this.props.location.engineerId}`, formData, config)
+    axios.put(`${process.env.REACT_APP_API_URL}/api/v1/engineer/changeProfilPicture/${this.props.location.engineerId}`, formData, config)
       .then( res=>{
         this.setState({
           message: 'Update Success!'
@@ -123,7 +123,7 @@ class DetailEngineer extends Component {
         <Row className="justify-content-center mt-3">
           <Col md='4' className="text-center">
             <Card style={{ width: '18rem' }}>
-              <Card.Img variant="top" src={'http://localhost:8080/images/'+this.state.profilPicture} />
+              <Card.Img variant="top" src={process.env.REACT_APP_API_URL+'/images/'+this.state.profilPicture} />
               <ListGroup className="list-group-flush">
                 <ListGroup.Item variant="primary" className="text-dark"><h3>{this.state.name}</h3></ListGroup.Item>
               </ListGroup>

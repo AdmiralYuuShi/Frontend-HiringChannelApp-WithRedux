@@ -2,7 +2,7 @@ import React from 'react'
 import { withRouter } from "react-router-dom";
 import axios from 'axios'
 import { Card, Button, Form } from 'react-bootstrap'
-import { getJwt } from '../helper/jwt'
+import { getJwt } from '../../helper/jwt'
 
 class EditProfil extends React.Component{
 
@@ -29,7 +29,7 @@ class EditProfil extends React.Component{
 
   componentDidMount(){
     // do something after component mounted
-    this.getEngineers('http://localhost:8080/api/v1/engineer/'+this.props.engineerId)
+    this.getEngineers(process.env.REACT_APP_API_URL+'/api/v1/engineer/'+this.props.engineerId)
   }
 
   getEngineers(url){
@@ -73,7 +73,7 @@ class EditProfil extends React.Component{
   handleEdit(e){
     e.preventDefault()
     const jwt = getJwt()
-    const api = `http://localhost:8080/api/v1/engineer/${this.state.engineer_id}`
+    const api = `${process.env.REACT_APP_API_URL}/api/v1/engineer/${this.state.engineer_id}`
     const data = {
       name: this.state.name,
       description: this.state.description,

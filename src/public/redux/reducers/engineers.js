@@ -2,20 +2,11 @@ const initialState = {
   engineers: [],
   detailPage: {},
   isLoading: false,
-  isError: false,
-  search: ''
+  isError: false 
 }
 
 const engineers = (state = initialState, action ) => {
   switch(action.type){
-    case "SEARCH_ENGINEERS":
-      console.log(action.payload)
-      return {
-        ...state,
-        isError: false,
-        isLoading: false,
-        search: action.payload
-      }
     case "FETCH_ENGINEERS_PENDING":
       return {
         ...state,
@@ -23,7 +14,6 @@ const engineers = (state = initialState, action ) => {
         isLoading: true
       }
     case "FETCH_ENGINEERS_FULFILLED":
-      console.log(action.payload)
       return {
         ...state,
         isLoading: false,
@@ -36,6 +26,21 @@ const engineers = (state = initialState, action ) => {
         ...state,
         isLoading: false,
         isError: true
+      }
+      case "UPDATE_ENGINEERS_PENDING":
+      return {
+        isError: false,
+        isLoading: true
+      }
+    case "UPDATE_ENGINEERS_FULFILLED":
+      return {
+        isError: false,
+        isLoading: false
+      }
+    case "UPDATE_ENGINEERS_REJECTED":
+      return {
+        isError: true,
+        isLoading: false
       }
     default:
       return state

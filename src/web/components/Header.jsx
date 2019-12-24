@@ -3,11 +3,16 @@ import { Link, withRouter } from "react-router-dom";
 import { Navbar, Nav, NavDropdown, Col } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserCircle, faCommentDots, faBell } from '@fortawesome/free-solid-svg-icons'
-import SearchField from './SearchField'
+import SearchField from './engineer/SearchField'
 import { getJwt } from '../helper/jwt'
 import logo from '../assets/images/arkademy-logo.png'
 
 class Header extends React.Component{
+
+
+  setDataFromSearch = (searchData) => {
+    this.props.getDataFromHeader(searchData) 
+  }
 
   handleLogout = () =>{
     localStorage.removeItem('jwtToken')
@@ -49,9 +54,9 @@ class Header extends React.Component{
           <Navbar.Collapse id="responsive-navbar-nav">
           <Col md="7">
           {this.props.searchBar === true ? 
-          <SearchField/>
+          <SearchField getDataFromSearch={this.setDataFromSearch} onChange={this.setDataFromSearch}/>
           :
-          <></>
+          <div></div>
           }
           </Col>
           <Col>
