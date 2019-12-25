@@ -1,9 +1,13 @@
 import React from 'react'
 import { Link, withRouter } from "react-router-dom";
-import axios from 'axios'
-import { Card, Row, Col, Button, Form } from 'react-bootstrap'
+// import axios from 'axios'
+import { Card, Row, Col, Button, Form, Alert } from 'react-bootstrap'
 
-class Register extends React.Component{
+import { connect } from 'react-redux'
+
+import { fetchUser } from '../../public/redux/actions/user'
+
+class Login extends React.Component{
 
   constructor(){
     super()
@@ -12,7 +16,8 @@ class Register extends React.Component{
       username: null,
       password: null,
       role: null,
-      registerMessage: ''
+      loginMessage: '',
+      errMessage: undefined
     }
   }
 
@@ -23,17 +28,25 @@ class Register extends React.Component{
       username: this.state.username,
       password: this.state.password
     } 
-    axios.post(api, data)
-    .then(res => {
-      localStorage.setItem('jwtToken', res.data.token)
-      localStorage.setItem('userId', res.data.user.userId)
-      localStorage.setItem('email', res.data.user.email)
-      localStorage.setItem('role', res.data.user.role)
+    this.props.fetch(api, data)
+    .then( _ => {
+      console.log(this.props.user.user[0])
+      localStorage.setItem('jwtToken', this.props.user.user[0].token)
+      localStorage.setItem('userId', this.props.user.user[0].user.userId)
+      localStorage.setItem('email', this.props.user.user[0].user.email)
+      localStorage.setItem('role', this.props.user.user[0].user.role)
       this.props.history.push("/");
     })
     .catch(err => {
-      console.log(err)
+      console.log(err.response.data.message)
+      this.setState({errMessage : err.response.data.message})
     })
+    // axios.post(api, data)
+    // .then(res => {
+    // })
+    // .catch(err => {
+    //   console.log(err)
+    // })
   }
 
   render(){
@@ -43,7 +56,10 @@ class Register extends React.Component{
           <Col md='4'>
             <Card>
               <Card.Header className="text-center"><h3>LOGIN</h3>
-                <>Not have any account yet? <Link to='/Register'>Register Here</Link></><br/><Link to='/engineer'> I'm Guess </Link>
+                {this.state.errMessage ? 
+                <Alert variant="warning">{this.state.errMessage}</Alert> 
+                : <></>}
+                Not have any account yet? <Link to='/Register'>Register Here</Link><br/><Link to='/engineer'> I'm Guess </Link>
               </Card.Header>
               <Card.Body>
                 <Form method="POST" onSubmit={ (e) => this.handleLogin(e)}>
@@ -81,4 +97,12 @@ class Register extends React.Component{
   }
 }
 
-export default withRouter(Register)
+const mapStateToProps = state => ({
+  user: state.user
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  fetch: (api, data) => dispatch(fetchUser(api, data))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login))

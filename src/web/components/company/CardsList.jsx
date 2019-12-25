@@ -1,10 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Card, CardColumns } from 'react-bootstrap'
+import { connect } from 'react-redux'
+import { Row, Col, Card, CardColumns } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons'
 import { css } from 'emotion'
-// import isLoading from '../../assets/images/isLoading.gif'
+import isLoading from '../../assets/images/isLoading.gif'
 import '../../assets/css/style.css'
 
 function CardsList(props){
@@ -12,7 +13,7 @@ function CardsList(props){
   const styles = {
     device : {
       '@media (min-width: 576px)': {
-          columnCount: 2
+        columnCount: 2
       },
       '@media (min-width: 768px)' : {
         columnCount: 3
@@ -21,14 +22,14 @@ function CardsList(props){
         columnCount: 4
       },
       '@media (min-width: 1200px)': {
-            columnCount: 5
+        columnCount: 5
       }
     }
   }
 
   return (
     <>
-    {/* {props.companies.isLoading === true ? 
+    {props.companies.isLoading === true ? 
     <Row className="text-center">
       <Col>
         <img
@@ -41,15 +42,8 @@ function CardsList(props){
       </Col>
     </Row>
     :
-    props.companies.detailPage.allData === 0 ? 
-    <Row className="justify-content-center text-center mt-5">
-      <Col md="4">
-        <Alert variant="danger"><h3>Data not found</h3></Alert> 
-      </Col>
-    </Row>
-    :  */}
     <CardColumns className={css(styles.device)} style={{padding: '20px'}}>
-      {props.list.map(companies => (
+      {props.companies.companies.map(companies => (
           <Card key={companies.company_id}>
           <Card.Img variant="top" src={process.env.REACT_APP_API_URL+'/images/'+companies.logo} />
             <Card.Footer className="text-white bg-dark" style={{ lineHeight: '100%'}}>
@@ -64,10 +58,14 @@ function CardsList(props){
             </Card.Footer>
           </Card>
        ))}
-      </CardColumns>
-    {/* } */}
+    </CardColumns>
+    }
     </>
   )
 }
 
-export default CardsList
+const mapStateToProps = state => ({
+  companies: state.companies
+})
+
+export default connect(mapStateToProps)(CardsList)

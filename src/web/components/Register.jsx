@@ -1,7 +1,10 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-import axios from 'axios'
 import { Card, Row, Col, Button, Form, Alert } from 'react-bootstrap'
+
+import { connect } from 'react-redux'
+
+import { fetchUser } from '../../public/redux/actions/user'
 
 class Register extends React.Component{
 
@@ -12,7 +15,8 @@ class Register extends React.Component{
       username: null,
       password: null,
       role: 'engineer',
-      registerMessage: ''
+      registerMessage: '',
+      errMessage: undefined
     }
   }
 
@@ -25,13 +29,14 @@ class Register extends React.Component{
       password: this.state.password,
       role: this.state.role,
     } 
-    axios.post(api, data)
-    .then(res => {
+    this.props.fetch(api, data)
+    .then( res => {
       console.log(res)
-      this.setState({registerMessage: res.data.message})
+      this.setState({registerMessage: res.value.data.message})
     })
     .catch(err => {
-      console.log(err)
+      console.log(err.response.data.message)
+      this.setState({errMessage : err.response.data.message})
     })
   }
 
@@ -42,6 +47,9 @@ class Register extends React.Component{
           <Col md='4'>
             <Card>
               <Card.Header className="text-center"><h3>REGISTER</h3>
+              {this.state.errMessage ? 
+                <Alert variant="warning">{this.state.errMessage}</Alert> 
+                : <></>}
               { this.state.registerMessage ?
               <Alert variant="success">
                 {this.state.registerMessage}<Link to='/login'> Login Here</Link>
@@ -106,4 +114,12 @@ class Register extends React.Component{
   }
 }
 
-export default Register
+const mapStateToProps = state => ({
+  user: state.user
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  fetch: (api, data) => dispatch(fetchUser(api, data))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register)

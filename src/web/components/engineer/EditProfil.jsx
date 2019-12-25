@@ -4,6 +4,11 @@ import axios from 'axios'
 import { Card, Button, Form } from 'react-bootstrap'
 import { getJwt } from '../../helper/jwt'
 
+import { connect } from 'react-redux'
+
+import { fetchEngineers } from '../../../public/redux/actions/engineers'
+
+
 class EditProfil extends React.Component{
 
   constructor(){
@@ -83,7 +88,7 @@ class EditProfil extends React.Component{
       showcase: this.state.showcase,
       expectedSalary: this.state.expected_salary,
       email: this.state.email,
-      phone: this.state.phone,
+      phone: this.state.phone
     } 
     axios.put(api, data, { headers: { Authorization: `Bearer ${jwt.jwtToken}`, email: jwt.email, userid: jwt.userId }})
     .then(res => {
@@ -191,4 +196,12 @@ class EditProfil extends React.Component{
   }
 }
 
-export default withRouter(EditProfil)
+const mapStateToProps = state => ({
+  engineers: state.engineers
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  fetch: (api) => dispatch(fetchEngineers(api))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(EditProfil))
