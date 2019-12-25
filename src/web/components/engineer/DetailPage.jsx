@@ -25,22 +25,51 @@ class DetailPage extends Component {
           </Col>
           <Col md='2'>
           <ButtonGroup>
+            {this.props.engineers.detailPage.page <= 1 ? <></> : 
             <Button variant="outline-dark" onClick={() => this.props.fetch(this.props.engineers.detailPage.prevLink)}>Prev</Button>
+            }
             <Button variant="outline-dark" className="pr-5 pl-5" disabled>{this.props.engineers.detailPage.page}/{this.props.engineers.detailPage.allPage}</Button>
+
+            {parseInt(this.props.engineers.detailPage.page) === this.props.engineers.detailPage.allPage ? <></> : 
             <Button variant="outline-dark" onClick={() => this.props.fetch(this.props.engineers.detailPage.nextLink)}>Next</Button>
+            }
           </ButtonGroup>
           </Col> 
           <Col md='5'>
             <InputGroup className="mb-3 pl-5 pr-5">
-              <DropdownButton as={InputGroup.Prepend} className="pl-5" variant="primary" title="Sort By">
+              <DropdownButton as={InputGroup.Prepend} className="pl-5 text-center" variant="primary" title="Sort By">
                 <Dropdown.Item onClick={() => this.props.sortBy('name')}>name</Dropdown.Item>
                 <Dropdown.Item onClick={() => this.props.sortBy('skill')}>skill</Dropdown.Item>
                 <Dropdown.Item onClick={() => this.props.sortBy('date_updated')}>date updated</Dropdown.Item>
               </DropdownButton>
-              <FormControl className="" aria-describedby="basic-addon1" defaultValue={this.props.engineers.detailPage.sortBy} disabled/>
-              <DropdownButton as={InputGroup.Append} className="pr-5" variant="primary" title={this.props.engineers.detailPage.orderBy ? this.props.engineers.detailPage.orderBy : 'ASC' }>
-                <Dropdown.Item onClick={() => this.props.orderBy('ASC')}>ASC</Dropdown.Item>
-                <Dropdown.Item onClick={() => this.props.orderBy('DESC')}>DESC</Dropdown.Item>
+              <FormControl className="" aria-describedby="basic-addon1" defaultValue={
+                this.props.engineers.detailPage.sortBy === 'name' ? 'Name' : 
+                this.props.engineers.detailPage.sortBy === 'skill' ? 'Skill' : 
+                this.props.engineers.detailPage.sortBy === 'date_updated' ? 'Date Updated' : ''
+              } disabled/>
+              <DropdownButton as={InputGroup.Append} className="pr-5" variant="primary" title={
+                this.props.engineers.detailPage.sortBy === 'name' && this.props.engineers.detailPage.orderBy === 'ASC' ? 'A-Z' : 
+                this.props.engineers.detailPage.sortBy === 'skill' && this.props.engineers.detailPage.orderBy === 'ASC' ? 'A-Z' :
+                this.props.engineers.detailPage.sortBy === 'date_updated' && this.props.engineers.detailPage.orderBy === 'ASC' ? 'Oldest' :
+                this.props.engineers.detailPage.sortBy === 'name' && this.props.engineers.detailPage.orderBy === 'DESC' ? 'Z-A' : 
+                this.props.engineers.detailPage.sortBy === 'skill' && this.props.engineers.detailPage.orderBy === 'DESC' ? 'Z-A' :
+                this.props.engineers.detailPage.sortBy === 'date_updated' && this.props.engineers.detailPage.orderBy === 'DESC' ? 'Newest' :
+                'A-Z'
+              }>
+                <Dropdown.Item onClick={() => this.props.orderBy('ASC')}>
+                {
+                this.props.engineers.detailPage.sortBy === 'name' || this.props.engineers.detailPage.sortBy === 'skill' ? 'A-Z' :
+                this.props.engineers.detailPage.sortBy === 'date_updated' ? 'Oldest' :
+                'ASC'
+                }
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => this.props.orderBy('DESC')}>
+                {
+                this.props.engineers.detailPage.sortBy === 'name' || this.props.engineers.detailPage.sortBy === 'skill' ? 'Z-A' : 
+                this.props.engineers.detailPage.sortBy === 'date_updated' ? 'Latest' :
+                'DESC'
+                }
+                </Dropdown.Item>
               </DropdownButton>
             </InputGroup>
           </Col>

@@ -115,6 +115,7 @@ class EditProfil extends React.Component{
                 type="text"
                 value={this.state.name}
                 onChange={ (e) => { this.setState({ name: e.target.value })}}
+                required
                 />
             </Form.Group>
             <Form.Group>
@@ -125,6 +126,7 @@ class EditProfil extends React.Component{
               type="text" 
               value={this.state.description}
               onChange={ (e) => { this.setState({ description: e.target.value })}}
+              required
               />
             </Form.Group>
             <Form.Group>
@@ -133,6 +135,7 @@ class EditProfil extends React.Component{
               name="skill" 
               type="text" 
               onChange={ (e) => { this.setState({ skill: e.target.value })}}
+              required
               value={this.state.skill} />
             </Form.Group>
             <Form.Group>
@@ -141,6 +144,7 @@ class EditProfil extends React.Component{
               name="location" 
               type="text" 
               onChange={ (e) => { this.setState({ location: e.target.value })}}
+              required
               value={this.state.location} />
             </Form.Group>
             <Form.Group>
@@ -150,6 +154,7 @@ class EditProfil extends React.Component{
               type="date"
               value={this.state.date_of_birth}
               onChange={ (e) => { this.setState({ date_of_birth: e.target.value })}}
+              required
                />
             </Form.Group>
             <Form.Group>
@@ -158,6 +163,7 @@ class EditProfil extends React.Component{
               name="showcase" 
               type="text" 
               onChange={ (e) => { this.setState({ showcase: e.target.value })}}
+              required
               value={this.state.showcase} />
             </Form.Group>
             <Form.Group>
@@ -166,6 +172,7 @@ class EditProfil extends React.Component{
               name="expected_salary" 
               type="text"
               onChange={ (e) => { this.setState({ expected_salary: e.target.value })}}
+              required
               value={this.state.expected_salary} />
             </Form.Group>
             <Form.Group>
@@ -174,6 +181,7 @@ class EditProfil extends React.Component{
               name="email" 
               type="email"
               onChange={ (e) => { this.setState({ email: e.target.value })}}
+              required
               value={this.state.email} disabled/>
             </Form.Group>
             <Form.Group>
@@ -182,6 +190,7 @@ class EditProfil extends React.Component{
               name="phone" 
               type="text"
               onChange={ (e) => { this.setState({ phone: e.target.value })}}
+              required
               value={this.state.phone} />
             </Form.Group>
             <Form.Group className="text-center">

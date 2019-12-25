@@ -84,6 +84,7 @@ class EditProfil extends React.Component{
                 type="text"
                 defaultValue={this.state.name}
                 onChange={ (e) => { this.setState({ name: e.target.value })}}
+                required
                 />
             </Form.Group>
             <Form.Group>
@@ -94,6 +95,7 @@ class EditProfil extends React.Component{
               type="text" 
               defaultValue={this.state.description}
               onChange={ (e) => { this.setState({ description: e.target.value })}}
+              required
               />
             </Form.Group>
             <Form.Group>
@@ -102,6 +104,7 @@ class EditProfil extends React.Component{
               name="location" 
               type="text" 
               onChange={ (e) => { this.setState({ location: e.target.value })}}
+              required
               defaultValue={this.state.location} />
             </Form.Group>
             <Form.Group className="text-center">
