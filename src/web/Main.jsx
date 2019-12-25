@@ -5,8 +5,9 @@ import CompaniesCard from './components/company/Cards'
 import Register from './components/Register'
 import Login from './components/Login'
 import DetailEngineer from './components/engineer/DetailEngineer'
+import DetailCompany from './components/company/DetailCompany'
 import EngineerProfile from './components/engineer/MyProfile'
-import CompanyProfile from './components/company/CreateCompanyProfile'
+import CompanyProfile from './components/company/CompanyProfil'
 import Welcome from './components/Welcome'
 
 function Main(){
@@ -19,7 +20,8 @@ function Main(){
       <Route path='/login' component={Login} />
       <Route exact path='/' component={Welcome} />
       <Route path='/engineer/myprofile' component={EngineerProfile} />
-      <Route path='/company/myprofile' component={CompanyProfile} />
+      <Route path='/company/companyprofile' component={CompanyProfile} />
+      <Route path='/company/detail' component={DetailCompany} />
     </Switch>
   )
 }

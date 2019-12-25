@@ -28,7 +28,7 @@ class Header extends React.Component{
   handleMyProfile = () =>{
     getJwt().role === 'engineer' ?
     this.props.history.push("/engineer/myprofile") :
-    this.props.history.push("/company/myprofile")
+    this.props.history.push("/company/companyprofile")
   }
 
   goHome = () =>{

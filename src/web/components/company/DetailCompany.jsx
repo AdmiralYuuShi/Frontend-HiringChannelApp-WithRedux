@@ -5,33 +5,31 @@ import { Form, Row, Col, Card, ListGroup, Button, ButtonGroup } from 'react-boot
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons'
 import Header from '../Header'
-import CreateProfile from './CreateCompanyProfile'
 import EditProfil from './EditProfil'
 import { getJwt } from '../../helper/jwt'
 
-class CompanyProfile extends Component {
+class DetailCompany extends Component {
   constructor(){
     super()
 
     this.state = {
       editProfil: false,
       company_id: null,
-      user_id: null,
-      name: null,
-      logo: null,
+      user_id: undefined,
+      name: undefined,
+      logo: 'no-image.png',
       company_logo: null,
-      description: null,
-      location: null,
+      description: undefined,
+      location: undefined,
       date_created: null,
       date_updated: null,
-      message: ''
+      message: undefined
     }
   }
 
   componentDidMount(){
     // do something after component mounted 
-    const jwt = getJwt()
-    this.getCompanies(process.env.REACT_APP_API_URL+'/api/v1/company/byUserId/'+jwt.userId)
+    this.getCompanies(process.env.REACT_APP_API_URL+'/api/v1/company/'+this.props.location.companyId)
   }
 
   handleEdit(){
@@ -95,7 +93,6 @@ class CompanyProfile extends Component {
 
     render(){
       const jwt = getJwt()
-      if(this.state.company_id){
         return(
           <>
           <Header />
@@ -148,14 +145,7 @@ class CompanyProfile extends Component {
           </Card>
           </>
         )
-      }else{
-        return(
-        <>
-          <CreateProfile />
-        </>
-      )
-      }
     }
 }
 
-export default withRouter(CompanyProfile)
+export default withRouter(DetailCompany)
