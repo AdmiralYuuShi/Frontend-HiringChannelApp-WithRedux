@@ -58,7 +58,7 @@ class MyProfile extends Component {
 
   changeProfilePicture(e){
     e.preventDefault()
-    console.log('======================= \n'+this.state.profil_picture+"\n ======================")
+    console.log('======================= \n'+JSON.stringify(this.state.profil_picture)+"\n ======================")
     let formData = new FormData()
     formData.append('file', this.state.profil_picture)
     const jwt = getJwt()
@@ -70,6 +70,7 @@ class MyProfile extends Component {
         this.setState({
           message: 'Update Success!'
         })
+        this.props.history.push("/engineer")
       })
       .catch(err=>{
         console.log(err)
@@ -135,7 +136,7 @@ class MyProfile extends Component {
                <div className="input-group pr-5 text-left">
                  <div className="custom-file">
                    <input type="file" className="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" onChange={(e) => this.setState({ profil_picture: e.target.files[0]})} />
-                   <label className="custom-file-label">Choose file</label>
+                   <label className="custom-file-label">{this.state.profil_picture ? this.state.profil_picture.name : 'Choose File'}</label>
                  </div>
                  <div className="input-group-append pr-3">
                    <button className="btn btn-success" type="submit" id="inputGroupFileAddon04">Upload</button>

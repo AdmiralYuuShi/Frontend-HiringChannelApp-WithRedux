@@ -167,7 +167,7 @@ class EditProfil extends React.Component{
               value={this.state.showcase} />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Expected Salary</Form.Label>
+              <Form.Label>Expected Salary ($)</Form.Label>
               <Form.Control 
               name="expected_salary" 
               type="text"

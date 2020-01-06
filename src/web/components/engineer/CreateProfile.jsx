@@ -122,7 +122,7 @@ class CreateProfile extends React.Component{
                   />
                 </Form.Group>
                 <Form.Group>
-                  <Form.Label>Expected Salary</Form.Label>
+                  <Form.Label>Expected Salary ($)</Form.Label>
                   <Form.Control 
                   name="expected_salary" 
                   type="text"

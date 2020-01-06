@@ -38,9 +38,9 @@ class DetailPage extends Component {
           <Col md='5'>
             <InputGroup className="mb-3 pl-5 pr-5">
               <DropdownButton as={InputGroup.Prepend} className="pl-5 text-center" variant="primary" title="Sort By">
-                <Dropdown.Item onClick={() => this.props.sortBy('name')}>name</Dropdown.Item>
-                <Dropdown.Item onClick={() => this.props.sortBy('skill')}>skill</Dropdown.Item>
-                <Dropdown.Item onClick={() => this.props.sortBy('date_updated')}>date updated</Dropdown.Item>
+                <Dropdown.Item onClick={() => this.props.sortBy('name')}>Name</Dropdown.Item>
+                <Dropdown.Item onClick={() => this.props.sortBy('skill')}>Skill</Dropdown.Item>
+                <Dropdown.Item onClick={() => this.props.sortBy('date_updated')}>Date Updated</Dropdown.Item>
               </DropdownButton>
               <FormControl className="" aria-describedby="basic-addon1" defaultValue={
                 this.props.engineers.detailPage.sortBy === 'name' ? 'Name' : 
@@ -53,7 +53,7 @@ class DetailPage extends Component {
                 this.props.engineers.detailPage.sortBy === 'date_updated' && this.props.engineers.detailPage.orderBy === 'ASC' ? 'Oldest' :
                 this.props.engineers.detailPage.sortBy === 'name' && this.props.engineers.detailPage.orderBy === 'DESC' ? 'Z-A' : 
                 this.props.engineers.detailPage.sortBy === 'skill' && this.props.engineers.detailPage.orderBy === 'DESC' ? 'Z-A' :
-                this.props.engineers.detailPage.sortBy === 'date_updated' && this.props.engineers.detailPage.orderBy === 'DESC' ? 'Newest' :
+                this.props.engineers.detailPage.sortBy === 'date_updated' && this.props.engineers.detailPage.orderBy === 'DESC' ? 'Latest' :
                 'A-Z'
               }>
                 <Dropdown.Item onClick={() => this.props.orderBy('ASC')}>

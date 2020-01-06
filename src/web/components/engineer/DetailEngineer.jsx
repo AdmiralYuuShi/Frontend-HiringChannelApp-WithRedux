@@ -47,7 +47,7 @@ class DetailEngineer extends Component {
     const jwt = getJwt()
     axios.delete(process.env.REACT_APP_API_URL+'/api/v1/engineer/'+this.props.location.engineerId, { headers: { Authorization: `Bearer ${jwt.jwtToken}`, email: jwt.email, userid: jwt.userId }} )
     .then(res => {
-      this.props.history.push("/engineer");
+      this.props.history.push("/engineer")
     })
     .catch(err => {
 
@@ -56,7 +56,6 @@ class DetailEngineer extends Component {
 
   changeProfilePicture(e){
     e.preventDefault()
-    console.log(this.state.profil_picture)
     let formData = new FormData()
     formData.append('file', this.state.profil_picture)
     const jwt = getJwt()
@@ -68,6 +67,7 @@ class DetailEngineer extends Component {
         this.setState({
           message: 'Update Success!'
         })
+        this.props.history.push("/engineer")
       })
       .catch(err=>{
         console.log(err)
@@ -80,7 +80,6 @@ class DetailEngineer extends Component {
   getEngineers(url){
     axios.get(url)
     .then(res => {
-      console.log(res.data.data[0])
       let d = new Date(res.data.data[0].date_of_birth)
       let option =  { year: 'numeric', month: 'long', day: 'numeric' }
       let dob = d.toLocaleDateString("en-UK", option)
@@ -115,7 +114,6 @@ class DetailEngineer extends Component {
         currency: 'USD',
         minimumFractionDigits: 2
       })
-      console.log('Profil Picture ======== '+this.state.profilPicture)
       return(
         <>
         <Header />
@@ -125,7 +123,7 @@ class DetailEngineer extends Component {
             <Card style={{ width: '18rem' }}>
               <Card.Img variant="top" src={process.env.REACT_APP_API_URL+'/images/'+this.state.profilPicture} />
               <ListGroup className="list-group-flush">
-                <ListGroup.Item variant="primary" className="text-dark"><h3>{this.state.name}</h3></ListGroup.Item>
+                <ListGroup.Item variant="light" className="text-dark"><h3>{this.state.name}</h3></ListGroup.Item>
               </ListGroup>
             </Card>
             { this.state.user_id === jwt.userId ? 
@@ -133,7 +131,7 @@ class DetailEngineer extends Component {
             <div className="input-group pr-5 text-left">
               <div className="custom-file">
                 <input type="file" className="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" onChange={(e) => this.setState({ profil_picture: e.target.files[0]})} />
-                <label className="custom-file-label">Choose file</label>
+                <label className="custom-file-label">{this.state.profil_picture ? this.state.profil_picture.name : 'Choose File'}</label>
               </div>
               <div className="input-group-append pr-3">
                 <button className="btn btn-success" type="submit" id="inputGroupFileAddon04">Upload</button>

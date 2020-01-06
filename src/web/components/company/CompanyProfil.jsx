@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 import { Form, Row, Col, Card, ListGroup, Button, ButtonGroup } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser, faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons'
+import { faUsers, faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons'
 import Header from '../Header'
 import CreateProfile from './CreateCompanyProfile'
 import EditProfil from './EditProfil'
@@ -129,7 +129,7 @@ class CompanyProfile extends Component {
             <EditProfil companyId={this.state.company_id}/>
             :
             <ListGroup>
-              <ListGroup.Item><FontAwesomeIcon icon={faUser} size="lg" /> {this.state.description}</ListGroup.Item>
+              <ListGroup.Item><FontAwesomeIcon icon={faUsers} size="lg" /> {this.state.description}</ListGroup.Item>
               <ListGroup.Item><FontAwesomeIcon icon={faMapMarkedAlt} size="lg" /> {this.state.location}</ListGroup.Item>
               { this.state.user_id === jwt.userId ? 
               <ListGroup.Item className="text-center">

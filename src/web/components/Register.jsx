@@ -81,6 +81,7 @@ class Register extends React.Component{
                   <Form.Group>
                     <Form.Label>Password</Form.Label>
                     <Form.Control 
+                    minlength='3'
                     name="password" 
                     type="password" 
                     onChange={ (e) => { this.setState({ password: e.target.value })}}
