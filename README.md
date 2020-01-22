@@ -38,8 +38,8 @@
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
 * [Screenshots](#screenshots)
+* [Related Project](#related-project-backend)
 * [Contact](#contact)
-* [Acknowledgements](#acknowledgements)
 
 
 
@@ -50,7 +50,7 @@
 The Hiring Channel App is a Restful API that contains data from Company and Engineer, which is made for Engineers to enter their profiles so that Companies can searching for Engineers that match their specifications.
 
 ### Built With
-This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+
 * [ReactJs](https://reactjs.org/)
 * [React Bootstrap](https://react-bootstrap.github.io/)
 
@@ -61,10 +61,8 @@ This section should list any major frameworks that you built your project using.
 ### Prerequisites
 
 This is an example of how to list things you need to use the software and how to install them.
-* npm
-```sh
-npm install npm@latest -g
-```
+
+* [nodejs](https://nodejs.org/en/download/)
 
 ### Installation
 
@@ -78,7 +76,7 @@ npm install
 ```
 3. Add .env file at root folder project, and add following
 ```sh
-REACT_APP_API_URL=http://54.164.140.233:8080
+REACT_APP_API_URL=[Backend API]
 ```
 
 
@@ -114,6 +112,10 @@ Contributions are what make the open source community such an amazing place to b
 
 
 
+## Related Project
+* [`Frontend-HiringChannelApp-ReactNative`](https://github.com/AdmiralYuuShi/HiringChannelApp-ReactNative)
+* [`Backend-HiringChannelApp`](https://github.com/AdmiralYuuShi/Backend-HiringChannelApp)
+
 
 <!-- CONTACT -->
 ## Contact
@@ -121,4 +123,8 @@ Contributions are what make the open source community such an amazing place to b
 My Email : hapidmochj12@gmail.com
 
 Project Link: [https://github.com/AdmiralYuuShi/Frontend-HiringChannelApp-WithRedux](https://github.com/AdmiralYuuShi/Frontend-HiringChannelApp-WithRedux)
+
+
+
+
 
