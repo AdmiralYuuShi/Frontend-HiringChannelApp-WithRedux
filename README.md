@@ -47,7 +47,7 @@
 ## About The Project
 
 
-The Hiring Channel App is a Restful API that contains data from Company and Engineer, which is made for Engineers to enter their profiles so that Companies can searching for Engineers that match their specifications.
+The Hiring Channel Web is a Website that contains data from Company and Engineer, which is made for Engineers to enter their profiles so that Companies can searching for Engineers that match their specifications.
 
 ### Built With
 
