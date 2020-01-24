@@ -9,7 +9,7 @@
 <br />
 <p align="center">
 
-  <h3 align="center">Hiring Channel App</h3>
+  <h3 align="center">Hiring Channel Web</h3>
   <p align="center">
     <image align="center" width="200" src='./screenshots/Component 1.png' />
   </p>
